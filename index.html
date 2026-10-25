@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fce7f3">
+    <title>Special Invitation For You! 💌</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Sacramento&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #fce7f3 0%, #ffe4e6 50%, #fed7aa 100%);
+        }
+        .script-font { font-family: 'Sacramento', cursive; }
+        .floating-heart {
+            position: absolute;
+            bottom: -2rem;
+            animation: floatUp 6s linear forwards;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0.5); opacity: 0; }
+            15% { opacity: 0.8; }
+            100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
+        }
+        .pulse-slow { animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 relative">
+    <div id="particles" class="absolute inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true"></div>
+
+    <main class="relative z-10 w-full max-w-md bg-white/80 backdrop-blur-md rounded-3xl shadow-2xl p-6 md:p-8 text-center border border-white/50 transition-all duration-500">
+        <audio id="sadAudio" loop preload="none" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3"></audio>
+        <audio id="romanticAudio" loop preload="none" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+
+        <section id="phase1" class="space-y-6">
+            <div class="w-20 h-20 bg-pink-100 rounded-full flex items-center justify-center mx-auto text-pink-500 text-3xl shadow-inner pulse-slow">
+                <i class="fa-solid fa-heart-pulse" aria-hidden="true"></i>
+            </div>
+            <h1 class="text-3xl font-bold text-gray-800">Hey Special One! 👋✨</h1>
+            <p class="text-gray-600 text-sm">Kuch secret baatein hain jo tumse kehni hain... Kya tum taiyyar ho? 😉</p>
+            <div class="bg-pink-50 rounded-2xl p-4 border border-pink-100 space-y-2">
+                <p class="text-xs text-pink-600 font-semibold uppercase tracking-wider">Tap to reveal compliments 👇</p>
+                <div id="complimentBox" class="text-gray-700 font-medium text-sm min-h-[40px] flex items-center justify-center transition-all duration-300" aria-live="polite">"Tumhari smile dekh kar mera poora din ban jaata hai! 😊"</div>
+                <button type="button" onclick="nextCompliment()" class="text-xs bg-pink-500 text-white px-3 py-1.5 rounded-full shadow hover:bg-pink-600 transition">Aur kya lagta hai? ✨</button>
+            </div>
+            <button type="button" onclick="goToPhase(2)" class="w-full bg-gradient-to-r from-pink-500 to-rose-500 text-white font-semibold py-3.5 rounded-2xl shadow-lg hover:opacity-90 transform active:scale-95 transition">Aage Badho! 🚀</button>
+        </section>
+
+        <section id="phase2" class="hidden space-y-6">
+            <div class="w-16 h-16 bg-rose-100 rounded-full flex items-center justify-center mx-auto text-rose-500 text-2xl"><i class="fa-solid fa-fire" aria-hidden="true"></i></div>
+            <h2 class="text-2xl font-bold text-gray-800">Vibe Match Meter 🔥</h2>
+            <p class="text-gray-600 text-sm">Dekhte hain humaari wavelength kitni milti hai!</p>
+            <div class="space-y-4 text-left bg-gray-50 p-4 rounded-2xl border">
+                <div><label for="q1" class="text-xs font-semibold text-gray-600">Chai ya Coffee? ☕</label>
+                    <select id="q1" class="w-full mt-1 p-2 text-sm bg-white border rounded-xl">
+                        <option>Chai lover forever! ☕</option><option>Coffee date best hai! 🥤</option>
+                    </select>
+                </div>
+                <div><label for="q2" class="text-xs font-semibold text-gray-600">Favorite Vibe? 🌙</label>
+                    <select id="q2" class="w-full mt-1 p-2 text-sm bg-white border rounded-xl">
+                        <option>Long drives &amp; Night talks 🌃</option><option>Food &amp; Chill 🍕</option>
+                    </select>
+                </div>
+            </div>
+            <button type="button" onclick="calculateVibe(this)" class="w-full bg-gradient-to-r from-rose-500 to-pink-500 text-white font-semibold py-3.5 rounded-2xl shadow-lg hover:opacity-90 transition">Match Check Karo! 💖</button>
+        </section>
+
+        <section id="phase3" class="hidden space-y-6">
+            <div class="w-20 h-20 bg-rose-200 rounded-full flex items-center justify-center mx-auto text-rose-600 text-3xl pulse-slow"><i class="fa-solid fa-gift" aria-hidden="true"></i></div>
+            <h2 id="proposalTitle" class="text-2xl font-bold text-gray-800">Kya tum mere sath ek cute si Date pe chaloge? 🥺🌹</h2>
+            <p id="proposalSub" class="text-gray-600 text-sm">Bahut saari baatein karni hain tumse...</p>
+            <div id="buttonGroup" class="flex gap-4 justify-center pt-2">
+                <button type="button" id="yesBtn" onclick="handleYes()" class="flex-1 bg-green-500 hover:bg-green-600 text-white font-bold py-3.5 px-6 rounded-2xl shadow-lg transform transition text-lg">HAAN! 🥰</button>
+                <button type="button" id="noBtn" onclick="handleNo()" onmouseover="dodgeNo()" class="flex-1 bg-red-500 hover:bg-red-600 text-white font-bold py-3.5 px-6 rounded-2xl shadow-lg transition text-lg relative">NAHI 🙄</button>
+            </div>
+        </section>
+
+        <section id="phase4" class="hidden space-y-6">
+            <div class="w-20 h-20 bg-pink-100 rounded-full flex items-center justify-center mx-auto text-pink-500 text-3xl animate-bounce"><i class="fa-solid fa-face-kiss-wink-heart" aria-hidden="true"></i></div>
+            <h2 class="text-2xl font-bold text-gray-800">YAYYY! Mujhe pata hi tha! 🎉❤️</h2>
+            <div class="bg-gradient-to-r from-pink-50 to-rose-50 p-4 rounded-2xl border border-pink-200 text-gray-700 italic space-y-1 shadow-inner">
+                <p class="text-xs text-pink-500 font-semibold uppercase tracking-widest not-italic">🎵 Dil Diyan Gallan 🎵</p>
+                <p class="text-sm font-medium">"Dil diyan gallan karenge naal naal beh ke..."</p>
+                <p class="text-sm font-medium">"Aankho se apne, yeh dil padh lena... ❤️"</p>
+            </div>
+            <div class="space-y-3 text-left">
+                <label for="dateSpot" class="text-xs font-semibold text-gray-600">Kahan chalna pasand karoge? 🗓️</label>
+                <select id="dateSpot" class="w-full p-2.5 text-sm bg-white border rounded-xl shadow-sm">
+                    <option>☕ Cozy Cafe &amp; Momos Date</option><option>🍕 Evening Long Drive &amp; Dinner</option><option>🌆 Sunset Walk &amp; Coffee</option>
+                </select>
+                <label for="dateTimeInput" class="text-xs font-semibold text-gray-600">Kab free ho? ✨</label>
+                <input type="text" id="dateTimeInput" value="Iss Saturday Shaam ko! ⏰" class="w-full p-2.5 text-sm bg-white border rounded-xl shadow-sm">
+            </div>
+            <button type="button" onclick="goToPhase(5)" class="w-full bg-gradient-to-r from-pink-500 to-rose-500 text-white font-semibold py-3.5 rounded-2xl shadow-lg hover:opacity-90 transition">Date Pass Generate Karo! 💌</button>
+        </section>
+
+        <section id="phase5" class="hidden space-y-5">
+            <div class="bg-gradient-to-br from-pink-500 to-rose-600 text-white p-5 rounded-2xl shadow-xl text-left relative overflow-hidden">
+                <div class="absolute -right-6 -bottom-6 text-white/10 text-8xl font-bold" aria-hidden="true">VIP</div>
+                <div class="flex justify-between items-center border-b border-white/20 pb-2 mb-3">
+                    <span class="text-xs uppercase tracking-widest font-semibold opacity-80">Official Date Pass 🎟️</span><i class="fa-solid fa-heart animate-pulse" aria-hidden="true"></i>
+                </div>
+                <h3 id="passActivity" class="text-base font-bold">☕ Cozy Cafe &amp; Momos Date</h3>
+                <p id="passTime" class="text-xs opacity-90 mt-1">🕒 Iss Saturday Shaam ko!</p>
+                <div class="mt-4 pt-3 border-t border-white/20 flex justify-between items-center text-xs">
+                    <span>Status: Confirmed! ✨</span><span class="font-bold script-font text-xl">Sealed with Love 💌</span>
+                </div>
+            </div>
+            <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-center shadow-sm animate-pulse">
+                <p class="text-amber-800 font-bold text-sm">📸 Ab iss screen ka screenshot leke turant mujhe bhej do!</p><p class="text-amber-600 text-xs mt-1">Main wait kar raha hoon! 😉❤️</p>
+            </div>
+            <button type="button" onclick="window.print()" class="w-full bg-white text-rose-600 border border-rose-200 font-semibold py-2.5 rounded-xl">Date Pass Print / Save PDF 🖨️</button>
+        </section>
+    </main>
+
+    <script>
+        'use strict';
+
+        const particlesContainer = document.getElementById('particles');
+        const compliments = [
+            "Tumhari smile dekh kar mera poora din ban jaata hai! 😊",
+            "Tumse baat kiye bina ab ek din bhi achha nahi lagta. ✨",
+            "Tum bohot special ho mere liye, shayad tumhe andaza bhi nahi! 🙈",
+            "Meri life ke sabse favorite insaan ho tum! 💖"
+        ];
+        let compIndex = 0;
+        let noClickCount = 0;
+        let particleTimer = null;
+
+        const sadAudio = document.getElementById('sadAudio');
+        const romanticAudio = document.getElementById('romanticAudio');
+
+        function nextCompliment() {
+            compIndex = (compIndex + 1) % compliments.length;
+            document.getElementById('complimentBox').innerText = `"${compliments[compIndex]}"`;
+        }
+
+        function goToPhase(phaseNum) {
+            for (let i = 1; i <= 5; i++) {
+                document.getElementById(`phase${i}`).classList.toggle('hidden', i !== phaseNum);
+            }
+
+            if (phaseNum === 4) {
+                sadAudio.pause();
+                romanticAudio.play().catch(() => {
+                    // Browsers may block audio until the visitor explicitly interacts.
+                });
+            }
+
+            if (phaseNum === 5) {
+                document.getElementById('passActivity').innerText = document.getElementById('dateSpot').value;
+                const time = document.getElementById('dateTimeInput').value.trim() || 'Time abhi decide karna hai ✨';
+                document.getElementById('passTime').innerText = `🕒 ${time}`;
+            }
+        }
+
+        function calculateVibe(button) {
+            if (!button || button.disabled) return;
+            button.disabled = true;
+            const originalText = 'Match Check Karo! 💖';
+            button.innerText = 'Calculating 1000% Match... 🔥';
+            window.setTimeout(() => {
+                goToPhase(3);
+                button.disabled = false;
+                button.innerText = originalText;
+            }, 800);
+        }
+
+        function handleNo() {
+            noClickCount++;
+            const noBtn = document.getElementById('noBtn');
+            const yesBtn = document.getElementById('yesBtn');
+
+            if (noClickCount === 1) {
+                sadAudio.currentTime = 0;
+                sadAudio.play().catch(() => {});
+                document.body.style.background = 'linear-gradient(135deg, #374151 0%, #1f2937 100%)';
+                document.getElementById('proposalTitle').innerText = 'Phir se soch lo na yaar! Dil todne ka irada hai kya? 💔';
+                document.getElementById('proposalSub').innerText = 'Aisa mat karo na... ek baar aur socho!';
+                noBtn.innerText = 'Nahi matlab NAHI! 😤';
+                yesBtn.innerText = 'Soch ke HAAN kar do! 🥰';
+            } else {
+                const currentSize = parseFloat(window.getComputedStyle(noBtn).fontSize);
+                if (currentSize > 10) noBtn.style.fontSize = `${Math.max(10, currentSize - 3)}px`;
+                noBtn.style.padding = '8px 12px';
+                noBtn.style.top = `${Math.random() * 40 - 20}px`;
+                noBtn.style.left = `${Math.random() * 40 - 20}px`;
+
+                if (noClickCount >= 5) {
+                    noBtn.innerText = 'HAAN! 💕';
+                    noBtn.style.backgroundColor = '#22c55e';
+                    noBtn.style.borderColor = '#22c55e';
+                    noBtn.onclick = handleYes;
+                    noBtn.onmouseover = null;
+                }
+            }
+        }
+
+        function dodgeNo() {
+            if (noClickCount >= 2) {
+                const noBtn = document.getElementById('noBtn');
+                noBtn.style.transform = `translate(${(Math.random() - 0.5) * 120}px, ${(Math.random() - 0.5) * 80}px)`;
+            }
+        }
+
+        function handleYes() {
+            sadAudio.pause();
+            sadAudio.currentTime = 0;
+            document.body.style.background = 'linear-gradient(135deg, #fce7f3 0%, #ffe4e6 50%, #fed7aa 100%)';
+            goToPhase(4);
+        }
+
+        // Create hearts at a modest rate and cap the number of live particles.
+        function addFloatingHeart() {
+            if (document.hidden || !particlesContainer) return;
+            if (particlesContainer.childElementCount >= 18) {
+                particlesContainer.firstElementChild?.remove();
+            }
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart text-pink-400 text-lg';
+            heart.textContent = ['❤️', '✨', '💖', '🌹', '🥰'][Math.floor(Math.random() * 5)];
+            heart.style.left = `${Math.random() * 100}vw`;
+            heart.style.animationDuration = `${Math.random() * 3 + 3}s`;
+            particlesContainer.appendChild(heart);
+            window.setTimeout(() => heart.remove(), 6500);
+        }
+
+        function startParticles() {
+            if (particleTimer === null) particleTimer = window.setInterval(addFloatingHeart, 650);
+        }
+        function stopParticles() {
+            if (particleTimer !== null) {
+                window.clearInterval(particleTimer);
+                particleTimer = null;
+            }
+        }
+        document.addEventListener('visibilitychange', () => document.hidden ? stopParticles() : startParticles());
+        startParticles();
+    </script>
+</body>
+</html>
